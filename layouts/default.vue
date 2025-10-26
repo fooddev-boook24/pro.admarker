@@ -26,7 +26,7 @@ function toTop() {
 <!--             
             <Header01></Header01> -->
 
-            <v-main  class="">
+            <v-main  class="main-root">
                 <RouterView /> 
 
                 <VLayoutItem model-value position="bottom" class="text-end" size="88">
@@ -65,5 +65,8 @@ function toTop() {
 .v-main{
     margin: 0px;
 }
+
+
+
 </style>
 

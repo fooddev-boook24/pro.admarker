@@ -56,16 +56,16 @@ useHead({
 <style scoped>
 /* スマホ幅に固定（必要なら数値を調整） */
 .mobile-width {
-  max-width: 580px;     /* 固定上限：スマホ幅 */
+  max-width: 480px;     /* 固定上限：スマホ幅 */
   width: 100%;          /* SPでは自然に全幅 */
-  padding-inline: 16px; /* 左右の内側余白（好みで） */
   margin: 0 auto;       /* 中央寄せ */
 }
 
 /* 好みで、少し伸縮させたい場合は clamp 版 */
 @media (min-width: 600px) {
   .mobile-width {
-    max-width: clamp(360px, 45vw, 480px);
+    max-width: 100%;
+    padding-inline: 0; /* 左右の余白なし */
   }
 }
 </style>
