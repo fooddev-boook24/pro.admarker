@@ -31,26 +31,18 @@ const props = defineProps({
               <span class="bg-primary pa-1 px-4 text-h4 font-weight-bold" >{{ dataStore.fvData.subtitle }}</span>
               <div class="mb-12"></div>
             </v-col>
-            <!-- <v-col cols="6" style="z-index: 0;">
-                <div class="d-flex justify-end align-center">
-                    <v-img  cover height="150" width="250" :src="dataStore.fvData.img" alt="image"  ></v-img>
-                </div>
-            </v-col> -->
             <v-col cols="6" style="z-index: 0;">
-              <div class="d-flex justify-end align-center">
-                <ClientOnly>
-                  <v-img
-                    v-if="dataStore?.fvData?.img"
-                    cover
-                    height="150"
-                    width="250"
-                    :src="dataStore.fvData.img"
-                    alt="image"
-                  />
-                </ClientOnly>
-              </div>
+                <div class="d-flex justify-end align-center">
+                    <!-- <v-img  cover height="150" width="250" :src="dataStore.fvData.img" alt="image"  ></v-img> -->
+                     <v-img
+                      :src="dataStore.fvData.img"
+                      alt="image"
+                      width="250"
+                      height="150"
+                      class="fixed-img"
+                    />
+                </div>
             </v-col>
-
         </v-row>
     </v-container>
   </div>

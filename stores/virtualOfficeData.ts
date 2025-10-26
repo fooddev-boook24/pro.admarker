@@ -14,7 +14,7 @@ export const virtualOfficeDataStore = defineStore({
       title1:"おすすめ",
       title2:"バーチャルオフィス",
       subtitle:"ランキング",
-      img:"https://res.cloudinary.com/fooddev/image/upload/v1687765152/pro.admarker/virtualoffice/top_gpf8ud.png"
+      img:"https://res.cloudinary.com/fooddev/image/upload/v1761478467/pro.admarker/smart-ring/smart-ring_tstiwa.png"
     },
     fv02:{
       title1:"●あなたに最適なオフィス診断",
