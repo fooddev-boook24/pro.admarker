@@ -16,7 +16,7 @@ useHead({
   <v-col cols="0" sm="3" md="3" lg="3" xl="3" class="d-none d-sm-block"></v-col>
 
   <v-col cols="12" sm="6" md="6" lg="6" xl="6" class="d-flex justify-center">
-    <!-- ここがスマホ幅に固定される -->
+    <!-- ここがスマホ幅に固定される. -->
     <div class="mobile-width">
       <Fv01 :dataStore="store" />
       <Fv0102 :dataStore="store" />
@@ -29,6 +29,8 @@ useHead({
 
   <v-col cols="0" sm="3" md="3" lg="3" xl="3" class="d-none d-sm-block"></v-col>
 </v-row>
+
+
 
 
 
