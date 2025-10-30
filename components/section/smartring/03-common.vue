@@ -44,22 +44,24 @@ function AfiClick(serviceName){
         </div>
 
 
-        <v-table density="compact">
-          <thead>
-            <tr>
-              <th class="text-left">
+        <v-table density="compact" >
+          <thead >
+            <tr
+            >
+              <th class="text-center">
                 <span class="font-weight-bold">{{ content.tableKey1 }}</span>
               </th>
-              <th class="text-left">
+              <th class="text-center">
                 <span class="font-weight-bold">{{ content.tableKey2 }}</span>
               </th>
-              <th class="text-left">
+              <th class="text-center">
                 <span class="font-weight-bold">{{ content.tableKey3 }}</span>
               </th>
             </tr>
           </thead>
           <tbody>
             <tr
+             class="text-center"
             >
               <td><span class="font-weight-bold">{{ content.tableValue1 }}</span></td>
               <td><span class="font-weight-bold">{{ content.tableValue2 }}</span></td>
@@ -73,7 +75,7 @@ function AfiClick(serviceName){
         <div class="my-box">
         <div class="title-box1 mt-8" >
         <div class="title-box1-title">機能性能</div>
-          <div v-html="content.uniqueContents1" class="uniqueContents1"></div>
+          <div v-html="content.uniqueContents1" class="uniqueContents1 font-weight-bold "></div>
         </div>
         </div>
 
@@ -87,7 +89,7 @@ function AfiClick(serviceName){
         <div class="my-box">
         <div class="title-box1 mt-8" >
         <div class="title-box1-title">製品仕様</div>
-          <div v-html="content.uniqueContents3"></div>
+          <div v-html="content.uniqueContents3" class="font-weight-bold"></div>
         </div>
         </div>
         

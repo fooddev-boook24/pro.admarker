@@ -6,10 +6,10 @@ const store = smartRingDataStore()
 
 const route = useRoute()
 const price = route.query.price=="価格"?"指定なし":route.query.price
-const touki = route.query.touki=="法人登記"?"指定なし":route.query.touki
-const koza = route.query.koza=="口座開設"?"指定なし":route.query.koza
-const kaigi = route.query.kaigi=="会議室"?"指定なし":route.query.kaigi
-const place = route.query.place=="場所"?"指定なし":route.query.place
+const weight = route.query.weight=="重量"?"指定なし":route.query.weight
+const health = route.query.health=="スリープヘルス"?"指定なし":route.query.health
+const pay = route.query.pay=="決済機能"?"指定なし":route.query.pay
+const charge = route.query.charge=="充電"?"指定なし":route.query.charge
 
 var filters=""
 
@@ -17,22 +17,22 @@ var filters=""
 if(price!="指定なし"){
   filters += "[and]searchParam1[contains]"+String(price)
 }
-if(touki!="指定なし"){
-  filters += "[and]searchParam2[contains]"+String(touki)
+if(weight!="指定なし"){
+  filters += "[and]searchParam2[contains]"+String(weight)
 }
-if(koza!="指定なし"){
-  filters += "[and]searchParam3[contains]"+String(koza)
+if(health!="指定なし"){
+  filters += "[and]searchParam3[contains]"+String(health)
 }
-if(kaigi!="指定なし"){
-  filters += "[and]searchParam4[contains]"+String(kaigi)
+if(pay!="指定なし"){
+  filters += "[and]searchParam4[contains]"+String(pay)
 }
-if(place!="指定なし"){
-  filters += "[and]searchParam5[contains]"+String(place)
+if(charge!="指定なし"){
+  filters += "[and]searchParam5[contains]"+String(charge)
 }
 
 const queries = {
     limit: 10, 
-    filters: 'pageCategory[equals]virtual-office' + filters
+    filters: 'pageCategory[equals]smart-ring' + filters
 }
 
 console.log(queries)

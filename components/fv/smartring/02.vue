@@ -10,7 +10,7 @@ const sel2=ref(props.dataStore.fv02.select02)
 const sel3=ref(props.dataStore.fv02.select03)
 const sel4=ref(props.dataStore.fv02.select04)
 const sel5=ref(props.dataStore.fv02.select05)
-const url= ref("/virtual-office/search?price=")
+const url= ref("/smart-ring/search?price=")
 
 </script>
 
@@ -81,7 +81,7 @@ const url= ref("/virtual-office/search?price=")
   </v-col>
 
   <v-col cols="6">
-    <v-btn :href="url+sel1+'&touki='+sel2+'&koza='+sel3+'&kaigi='+sel4+'&place='+sel5"
+    <v-btn :href="url+sel1+'&weight='+sel2+'&health='+sel3+'&pay='+sel4+'&charge='+sel5"
       block color="gray" class="mt-1 font-weight-bold" >
       <span class="">検索する</span>
     </v-btn>

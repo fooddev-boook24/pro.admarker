@@ -47,7 +47,7 @@ export const smartRingDataStore = defineStore({
     },
     sec03:{
       callout1:"確認はこちらから！",
-      callout2:"今すぐ申し込み！",
+      callout2:"今すぐ購入！",
       reviewtitle:"登録者のレビュー",
       pageaction:"公式サイトを見る",
     },
