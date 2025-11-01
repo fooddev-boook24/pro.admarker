@@ -13,7 +13,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <Header01></Header01>
+  <HeaderSmartring01></HeaderSmartring01>
 
   <div class="bg-secondary">
     <v-container class="maxWidth">

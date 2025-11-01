@@ -60,12 +60,14 @@ useHead({
   width: 100%;          /* SPでは自然に全幅 */
   padding-inline: 16px; /* 左右の内側余白（好みで） */
   margin: 0 auto;       /* 中央寄せ */
+  padding: 0px;
 }
 
 /* 好みで、少し伸縮させたい場合は clamp 版 */
 @media (min-width: 600px) {
   .mobile-width {
     max-width: clamp(360px, 45vw, 480px);
+    
   }
 }
 </style>

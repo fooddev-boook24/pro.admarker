@@ -89,11 +89,11 @@ function AfiClick(serviceName){
         <div class="my-box">
         <div class="title-box1 mt-8" >
         <div class="title-box1-title">製品仕様</div>
-          <div v-html="content.uniqueContents3" class="font-weight-bold"></div>
+          <div v-html="content.uniqueContents3" class="uniqueContents3 font-weight-bold"></div>
         </div>
         </div>
         
-        <div class="mt-6">
+        <div class="mt-6 text-center">
           <div v-if="content.servicePrivilege1">
             <v-icon size="large" type="mdi" icon="mdi-check-bold" color="primary"></v-icon>
             <span class="font-weight-bold text-h5 my-underline2">
@@ -444,7 +444,10 @@ margin-left: 50%;
 }
 
 /deep/ .uniqueContents1{
-  font-size: 0.5rem;
+  font-size: 0.8rem;
+}
+/deep/ .uniqueContents3{
+  font-size: 0.8rem;
 }
 /deep/ span.my-ok {
 color: #1b3c65;
