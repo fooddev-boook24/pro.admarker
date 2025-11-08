@@ -11,7 +11,8 @@ function AfiClick(serviceName){
   window.dataLayer.push({
     event: "AfiClick", 
     serviceName:serviceName,
-    page:location.pathname
+    page:location.pathname,
+    category:"smart-ring"
   })
 }
 
