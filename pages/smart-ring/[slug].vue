@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+
 type FAQItem = {
   question?: string
   answer?: string
@@ -80,7 +82,7 @@ const tocItems = computed<TocItem[]>(() => {
 
 const renderFaqAnswer = (faq: FAQItem) => faq.answer ?? ''
 
-// ===== SEO =====
+// ===== OGP / SEO =====
 useHead(() => {
   const a = article.value
   const title = a
@@ -100,6 +102,61 @@ useHead(() => {
       ...(noindex ? [{ name: 'robots', content: 'noindex' }] : []),
     ],
   }
+})
+
+// ===== 記事内リンククリック計測（AfiClick） =====
+const articleBodyRef = ref<HTMLElement | null>(null)
+
+const AfiClick = (serviceName: string) => {
+  if (typeof window === 'undefined') return
+  const w = window as any
+  w.dataLayer = w.dataLayer || []
+  w.dataLayer.push({
+    event: 'AfiClick',
+    serviceName,
+    page: location.pathname,
+    category: 'smart-ring',
+  })
+}
+
+// 商品リンクを data 属性 → href の順に判定
+const detectServiceName = (anchor: HTMLAnchorElement): string | null => {
+  // ① data-afi-service を最優先（新実装）
+  const service = anchor.dataset.afiService
+  if (service) return service
+
+  // ② 旧実装との互換性のためのフォールバック（URL マッチ）
+  const href = anchor.href
+  if (href.includes('45GG16+F0078A+5QLS+BWVTE')) return 'RingConn'
+  if (href.includes('45HZLV+CRMRNE+5TII+5YJRM')) return 'SmartRecoveryRing'
+  if (href.includes('soxai.co.jp')) return 'SOXIA'
+
+  return null
+}
+
+const clickHandler = (event: Event) => {
+  const target = event.target as HTMLElement | null
+  if (!target) return
+
+  const anchor = target.closest('a') as HTMLAnchorElement | null
+  if (!anchor || !anchor.href) return
+
+  const serviceName = detectServiceName(anchor)
+  if (!serviceName) return
+
+  AfiClick(serviceName)
+}
+
+onMounted(() => {
+  const el = articleBodyRef.value
+  if (!el) return
+  el.addEventListener('click', clickHandler)
+})
+
+onBeforeUnmount(() => {
+  const el = articleBodyRef.value
+  if (!el) return
+  el.removeEventListener('click', clickHandler)
 })
 </script>
 
@@ -210,6 +267,7 @@ useHead(() => {
             v-if="renderedBody"
             class="article-body"
             v-html="renderedBody"
+            ref="articleBodyRef"
           />
 
           <!-- FAQ -->
@@ -254,7 +312,6 @@ useHead(() => {
               ← スマートリング比較ページに戻る
             </NuxtLink>
           </footer>
-
         </article>
       </v-col>
 
@@ -278,5 +335,5 @@ useHead(() => {
 </template>
 
 <style scoped>
-
+/* スタイルは _article.scss で管理 */
 </style>
