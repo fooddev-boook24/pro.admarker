@@ -33,6 +33,11 @@ type Article = {
   eyecatch?: Eyecatch
 }
 
+// ===== ページキー設定（slugごとに別インスタンスにする） =====
+definePageMeta({
+  key: (route) => route.fullPath,
+})
+
 // ===== microCMS から記事取得 =====
 const route = useRoute()
 const slug = route.params.slug as string
@@ -157,6 +162,53 @@ onBeforeUnmount(() => {
   const el = articleBodyRef.value
   if (!el) return
   el.removeEventListener('click', clickHandler)
+})
+
+// ===== 関連記事（同カテゴリ smart-ring から自動抽出） =====
+const related = await useMicroCMSGetList<Article>({
+  endpoint: '002-article',
+  queries: {
+    filters: [
+      'pageCategory[contains]smart-ring',
+      `slug[not_equals]${slug}`,
+    ].join('[and]'),
+    limit: 50,
+  },
+})
+
+const relatedArticles = computed(() => {
+  if (!related.data?.value) return []
+  const list = related.data.value.contents
+
+  // スコア付けで関連度を評価
+  return list
+    .map((item) => {
+      let score = 0
+
+      if (
+        item.mainProductName &&
+        item.mainProductName === article.value?.mainProductName
+      ) {
+        score += 50
+      }
+      if (
+        item.articleType &&
+        item.articleType[0] === article.value?.articleType?.[0]
+      ) {
+        score += 20
+      }
+      if (
+        item.mainKeyword &&
+        article.value?.mainKeyword &&
+        item.mainKeyword.includes(article.value.mainKeyword)
+      ) {
+        score += 10
+      }
+
+      return { ...item, score }
+    })
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 5) // 上位5件
 })
 </script>
 
@@ -288,7 +340,7 @@ onBeforeUnmount(() => {
             </v-expansion-panels>
           </section>
 
-          <!-- 戻りリンク -->
+          <!-- フッター（CTA + 関連記事 + 戻りリンク） -->
           <footer class="article-footer">
             <!-- CTA ブロック -->
             <section class="article-cta">
@@ -307,7 +359,43 @@ onBeforeUnmount(() => {
               </NuxtLink>
             </section>
 
-            <!-- 既存の戻りリンク -->
+            <!-- 関連記事 -->
+            <section class="related-articles" v-if="relatedArticles.length">
+              <h2 class="related-title">関連記事</h2>
+
+              <ul class="related-list">
+                <li
+                  v-for="item in relatedArticles"
+                  :key="item.id"
+                  class="related-item"
+                >
+                  <NuxtLink :to="`/smart-ring/${item.slug}`">
+                    <div class="related-card">
+                      <!-- サムネイル -->
+                      <div class="related-thumb" v-if="item.eyecatch?.url">
+                        <v-img
+                          :src="item.eyecatch.url"
+                          :alt="item.title"
+                          cover
+                        />
+                      </div>
+
+                      <!-- テキスト部分 -->
+                      <div class="related-content">
+                        <p class="related-name">
+                          {{ item.title }}
+                        </p>
+                        <p class="related-tag" v-if="item.mainProductName">
+                          {{ item.mainProductName }}
+                        </p>
+                      </div>
+                    </div>
+                  </NuxtLink>
+                </li>
+              </ul>
+            </section>
+
+            <!-- 戻りリンク -->
             <NuxtLink to="/smart-ring" class="link-back">
               ← スマートリング比較ページに戻る
             </NuxtLink>
