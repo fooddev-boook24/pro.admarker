@@ -359,41 +359,44 @@ const relatedArticles = computed(() => {
               </NuxtLink>
             </section>
 
-            <!-- 関連記事 -->
-            <section class="related-articles" v-if="relatedArticles.length">
-              <h2 class="related-title">関連記事</h2>
+<section class="related-articles" v-if="relatedArticles.length">
+  <h2 class="related-title">関連記事</h2>
 
-              <ul class="related-list">
-                <li
-                  v-for="item in relatedArticles"
-                  :key="item.id"
-                  class="related-item"
-                >
-                  <NuxtLink :to="`/smart-ring/${item.slug}`">
-                    <div class="related-card">
-                      <!-- サムネイル -->
-                      <div class="related-thumb" v-if="item.eyecatch?.url">
-                        <v-img
-                          :src="item.eyecatch.url"
-                          :alt="item.title"
-                          cover
-                        />
-                      </div>
+  <ul class="related-list">
+    <li
+      v-for="item in relatedArticles"
+      :key="item.id"
+      class="related-item"
+    >
+      <a
+        :href="`/smart-ring/${item.slug}`"
+        class="related-link"
+      >
+        <div class="related-card">
+          <!-- サムネイル -->
+          <div class="related-thumb" v-if="item.eyecatch?.url">
+            <v-img
+              :src="item.eyecatch.url"
+              :alt="item.title"
+              cover
+            />
+          </div>
 
-                      <!-- テキスト部分 -->
-                      <div class="related-content">
-                        <p class="related-name">
-                          {{ item.title }}
-                        </p>
-                        <p class="related-tag" v-if="item.mainProductName">
-                          {{ item.mainProductName }}
-                        </p>
-                      </div>
-                    </div>
-                  </NuxtLink>
-                </li>
-              </ul>
-            </section>
+          <!-- テキスト部分 -->
+          <div class="related-content">
+            <p class="related-name">
+              {{ item.title }}
+            </p>
+            <p class="related-tag" v-if="item.mainProductName">
+              {{ item.mainProductName }}
+            </p>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+</section>
+
 
             <!-- 戻りリンク -->
             <NuxtLink to="/smart-ring" class="link-back">
