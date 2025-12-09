@@ -304,8 +304,7 @@ const relatedArticles = computed(() => {
               :src="article.eyecatch.url"
               class="eyecatch"
               :alt="article.title"
-              height="260"
-              cover
+       
             />
 
             <!-- リード文 -->
