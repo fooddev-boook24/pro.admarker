@@ -52,70 +52,54 @@ const relatedArticles = computed<Article[]>(() => {
 </script>
 
 <template>
-  <v-row>
-    <v-col cols="0" sm="3" md="3" lg="3" xl="3" class="d-none d-sm-block"></v-col>
-
-    <v-col
-      cols="12"
-      sm="6"
-      md="6"
-      lg="6"
-      xl="6"
-      class="d-flex justify-center"
-    >
-      <!-- ここがスマホ幅に固定される -->
+  <!-- ✅ PC時：本文(580px) + 右目次(280px) の2カラム -->
+  <div class="page-layout">
+    <!-- 本文 -->
+    <main class="page-main">
       <div class="mobile-width">
-        <!-- 既存の比較コンテンツ -->
         <FvSmartring01 :dataStore="store" />
         <FvSmartring02 :dataStore="store" />
         <FvSmartring03 :dataStore="store" />
         <SectionSmartring01 :dataStore="store" />
         <SectionSmartring02 :dataStore="store" />
+
+        <!-- ✅ ランキング（目次はこの中で生成し、Teleportで右へ出す） -->
         <SectionSmartring03 :dataStore="store" />
 
-<section class="related-articles" v-if="relatedArticles.length">
-  <h2 class="related-title">関連記事</h2>
+        <section class="related-articles" v-if="relatedArticles.length">
+          <h2 class="related-title">関連記事</h2>
 
-  <ul class="related-list">
-    <li
-      v-for="item in relatedArticles"
-      :key="item.id"
-      class="related-item"
-    >
-      <a
-        :href="`/smart-ring/${item.slug}`"
-        class="related-link"
-      >
-        <div class="related-card">
-          <!-- サムネイル -->
-          <div class="related-thumb" v-if="item.eyecatch?.url">
-            <v-img
-              :src="item.eyecatch.url"
-              :alt="item.title"
-              cover
-            />
-          </div>
+          <ul class="related-list">
+            <li v-for="item in relatedArticles" :key="item.id" class="related-item">
+              <!-- ✅ リンク手法は変更しない -->
+              <a :href="`/smart-ring/${item.slug}`" class="related-link">
+                <div class="related-card">
+                  <div class="related-thumb" v-if="item.eyecatch?.url">
+                    <v-img :src="item.eyecatch.url" :alt="item.title" cover />
+                  </div>
 
-          <!-- テキスト部分 -->
-          <div class="related-content">
-            <p class="related-name">
-              {{ item.title }}
-            </p>
-            <p class="related-tag" v-if="item.mainProductName">
-              {{ item.mainProductName }}
-            </p>
-          </div>
-        </div>
-      </a>
-    </li>
-  </ul>
-</section>
-
+                  <div class="related-content">
+                    <p class="related-name">
+                      {{ item.title }}
+                    </p>
+                    <p class="related-tag" v-if="item.mainProductName">
+                      {{ item.mainProductName }}
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </section>
       </div>
-    </v-col>
+    </main>
 
-    <v-col cols="0" sm="3" md="3" lg="3" xl="3" class="d-none d-sm-block"></v-col>
-  </v-row>
+    <!-- 右目次（器だけ index.vue に用意） -->
+    <aside class="page-toc">
+      <!-- ✅ SectionSmartring03.vue がここに Teleport してくる -->
+      <div id="right-toc"></div>
+    </aside>
+  </div>
 </template>
 
 <style>
@@ -128,19 +112,70 @@ const relatedArticles = computed<Article[]>(() => {
 </style>
 
 <style scoped>
-/* スマホ幅に固定（必要なら数値を調整） */
+/* ✅ ページ全体：SPは1カラム、PCは2カラム */
+.page-layout {
+  display: block;
+  width: 100%;
+}
+
+@media (min-width: 960px) {
+  .page-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px; /* 本文 + 右目次 */
+    gap: 18px;
+    max-width: 980px; /* 本文580 + 目次280 + gap */
+    margin: 0 auto;
+    padding: 0 12px;
+  }
+}
+
+.page-main {
+  display: flex;
+  justify-content: center;
+}
+
+/* ✅ 右目次はPCだけ表示 */
+.page-toc {
+  display: none;
+}
+
+
+/* ✅ PC時：右目次の器を「画面に固定」する（stickyは使わない） */
+@media (min-width: 960px) {
+  /* 右カラム自体は幅だけ確保（見た目の整列用） */
+  .page-toc {
+    display: block;
+    width: 280px;
+  }
+
+  /* Teleport先（中身）を画面固定にする */
+  #right-toc {
+    position: fixed;
+    top: 96px;     /* ヘッダー高さに合わせる */
+    width: 280px;
+    z-index: 10;
+
+    /* 980pxで中央寄せしてるレイアウトに合わせて右位置を計算 */
+    right: max(12px, calc((100vw - 980px) / 2 + 12px));
+
+    max-height: calc(100vh - 120px);
+    overflow: auto;
+  }
+}
+
+
+/* 本文幅（あなたの設計：本文は580固定） */
 .mobile-width {
-  max-width: 580px; /* 固定上限：スマホ幅 */
-  width: 100%; /* SPでは自然に全幅 */
-  padding-inline: 16px; /* 左右の内側余白（好みで） */
-  margin: 0 auto; /* 中央寄せ */
+  max-width: 580px;
+  width: 100%;
+  padding-inline: 16px;
+  margin: 0 auto;
   padding: 0px;
 }
 
-/* 好みで、少し伸縮させたい場合は clamp 版 */
 @media (min-width: 600px) {
   .mobile-width {
-    max-width: clamp(360px, 45vw, 480px);
+    max-width: clamp(360px, 45vw, 580px);
   }
 }
 
