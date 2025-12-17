@@ -31,7 +31,7 @@ export const smartRingDataStore = defineStore({
 
     },
     fv03:{
-      title1:"みんなが選んだ定番スマートリングTOP3"
+      title1:"みんなが選んだ定番スマートリング"
     },
     sec01:{
       title1:"スマートリングを選びたいけど",
