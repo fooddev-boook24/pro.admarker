@@ -94,7 +94,7 @@ const data = await useMicroCMSGetList({
 </div>
 
 <div class="mt-10">
-  <Section0103Common :data="data" :dataStore="store"></Section0103Common>
+  <SectionSmartring03Common :data="data" :dataStore="store"></SectionSmartring03Common>
 </div>
 </v-col>
 
