@@ -27,10 +27,10 @@ const { data } = await useMicroCMSGetList({
 
 function AfiClick(serviceName) {
   window.dataLayer.push({
-    event: 'AfiClick',
+    event: 'AfiClicks',
     serviceName: serviceName,
     page: location.pathname,
-    category: 'smart-ring',
+    category: 'smart-rings',
   })
 }
 </script>
