@@ -45,7 +45,12 @@ function AfiClick(serviceName) {
     <div class="carousel-wrap">
       <Carousel :items-to-show="2.5" :wrap-around="true" :autoplay="2000">
         <Slide v-for="content in data.contents" :key="content">
-          <nuxt-link :to="content.pageURL" target="_blank" @click="AfiClick(content.serviceName)">
+          <a
+            :href="content.pageURL"
+            target="_blank"
+            rel="noopener noreferrer"
+            @click.stop="AfiClick(content.serviceName)"
+>
             <div class="carousel__item">
               <!-- ここはあなたのまま：cover維持 -->
               <v-img :src="content.serviceImage.url" alt="" loading="lazy" class="fill-height" cover />
@@ -64,7 +69,7 @@ function AfiClick(serviceName) {
                 <p class="rate-text">{{ content.servicePoints }}</p>
               </div>
             </div>
-          </nuxt-link>
+          </a>
         </Slide>
 
         <template #addons>

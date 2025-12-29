@@ -7,6 +7,14 @@ const props = defineProps({
   dataStore: Object,
 })
 
+function openInNewTab(url: string) {
+  // ブラウザでのみ実行（SSR対策）
+  if (process.client) {
+    globalThis.open(url, '_blank', 'noopener')
+  }
+}
+
+
 function AfiClick(serviceName) {
   window.dataLayer.push({
     event: 'AfiClick',
@@ -190,17 +198,19 @@ function AfiClick(serviceName) {
           {{ dataStore.sec03.callout1 }}<span class="text-error">{{ dataStore.sec03.callout2 }}</span>
         </div>
 
-        <v-btn
-          @click="AfiClick(content.serviceName)"
-          :href="content.pageURL"
-          target="_blank"
-          block
-          rounded="xl"
-          size="x-large"
-          class="text-white my-btn"
-        >
-          {{ dataStore.sec03.pageaction }}
-        </v-btn>
+<v-btn
+  @click.stop.prevent="() => { 
+    AfiClick(content.serviceName); 
+    openInNewTab(content.pageURL); 
+  }"
+  block
+  rounded="xl"
+  size="x-large"
+  class="text-white my-btn"
+>
+  {{ dataStore.sec03.pageaction }}
+</v-btn>
+
       </div>
 
       <!-- ✅ CTA → Review：隙間を広げる -->
@@ -289,11 +299,11 @@ function AfiClick(serviceName) {
         <div class="text-center font-weight-bold">
           {{ dataStore.sec03.callout1 }}<span class="text-error">{{ dataStore.sec03.callout2 }}</span>
         </div>
-
         <v-btn
-          @click="AfiClick(content.serviceName)"
-          :href="content.pageURL"
-          target="_blank"
+          @click.stop.prevent="() => { 
+            AfiClick(content.serviceName); 
+            openInNewTab(content.pageURL); 
+          }"
           block
           rounded="xl"
           size="x-large"
@@ -301,6 +311,7 @@ function AfiClick(serviceName) {
         >
           {{ dataStore.sec03.pageaction }}
         </v-btn>
+
       </div>
 
       <!-- ✅ メリット・デメリット：title-box1（四隅丸角＋影） -->
@@ -365,17 +376,19 @@ function AfiClick(serviceName) {
           </v-list>
 
           <div class="mt-4">
-            <v-btn
-              @click="AfiClick(content.serviceName)"
-              :href="content.pageURL"
-              target="_blank"
-              block
-              rounded="xl"
-              size="x-large"
-              class="text-white my-btn"
-            >
-              {{ dataStore.sec03.pageaction }}
-            </v-btn>
+          <v-btn
+            @click.stop.prevent="() => { 
+              AfiClick(content.serviceName); 
+              openInNewTab(content.pageURL); 
+            }"
+            block
+            rounded="xl"
+            size="x-large"
+            class="text-white my-btn"
+          >
+            {{ dataStore.sec03.pageaction }}
+          </v-btn>
+
           </div>
         </div>
       </div>
