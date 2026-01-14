@@ -192,6 +192,17 @@ function AfiClick(serviceName) {
         </div>
       </div>
 
+      <!-- ✅ 詳細ページへ遷移 -->
+      <div class="my-box my-box-gap">
+        <div class="title-box1">
+          <div class="title-box1-title">こちらもチェック！</div>
+          <div
+            v-html="content.uniqueContents2"
+            class="uniqueContents3 font-weight-bold"
+          ></div>
+        </div>
+      </div>
+
       <!-- CTA -->
       <div class="cta-area">
         <div class="text-center font-weight-bold">
@@ -555,6 +566,24 @@ function AfiClick(serviceName) {
 /* ✅ CTA → Review：間を広げる（ここが効く） */
 .review-head {
   margin-top: 28px; /* ← CTA直後が詰まってたのを戻す */
+}
+
+:deep(.buttonOutline){
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 320px;
+  height: 44px;
+  padding: 8px 24px;
+  font-family: sans-serif;
+  font-size: 16px;
+  color: #1b3c65;
+  text-align: center;
+  overflow-wrap: anywhere;
+  background-color: transparent;
+  border: 3px solid #1b3c65;
+  text-decoration: none;
 }
 
 /* Review見出し（既存意匠維持） */
