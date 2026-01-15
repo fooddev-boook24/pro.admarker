@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { smartRingDataStore } from "@/stores/smartRingData"
 const store = smartRingDataStore()
 useHead({ 
-    title: '【2025版】おすすめスマートリング 徹底比較' ,
+    title: '【2026版】おすすめスマートリング 徹底比較' ,
     meta: [
         { name: 'description', content: 'おすすめのスマートリングを徹底比較し、あなたに最適なスマートリングを紹介します。' }
     ],
