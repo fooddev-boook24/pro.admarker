@@ -1,21 +1,21 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { smartRingDataStore } from '@/stores/smartRingData'
+import { mattressDataStore } from '@/stores/mattressData'
 
-const store = smartRingDataStore()
+const store = mattressDataStore()
 
 useHead({
-  title: '【2026版】おすすめスマートリング 徹底比較',
+  title: '【2026版】マットレス 徹底比較',
   meta: [
     {
       name: 'description',
       content:
-        'おすすめのスマートリングを徹底比較し、あなたに最適なスマートリングを紹介します。',
+        'おすすめのマットレスを徹底比較し、あなたに最適なマットレスを紹介します。',
     },
   ],
 })
 
-// ===== 記事一覧（smart-ring カテゴリの公開記事） =====
+// ===== 記事一覧（mattress カテゴリの公開記事） =====
 type Eyecatch = {
   url: string
   height?: number
@@ -38,7 +38,7 @@ const { data: relatedData, error: relatedError } =
     endpoint: '002-article',
     queries: {
       filters: [
-        'pageCategory[contains]smart-ring',
+        'pageCategory[contains]mattress',
         'statusFlag[contains]public',
       ].join('[and]'),
       limit: 6,
@@ -57,14 +57,14 @@ const relatedArticles = computed<Article[]>(() => {
     <!-- 本文 -->
     <main class="page-main">
       <div class="mobile-width">
-        <FvSmartring01 :dataStore="store" />
-        <FvSmartring02 :dataStore="store" />
-        <FvSmartring03 :dataStore="store" />
-        <SectionSmartring01 :dataStore="store" />
-        <SectionSmartring02 :dataStore="store" />
+        <FvMattress01 :dataStore="store" />
+        <FvMattress02 :dataStore="store" />
+        <FvMattress03 :dataStore="store" />
+        <SectionMattress01 :dataStore="store" />
+        <SectionMattress02 :dataStore="store" />
 
         <!-- ✅ ランキング（目次はこの中で生成し、Teleportで右へ出す） -->
-        <SectionSmartring03 :dataStore="store" />
+        <SectionMattress03 :dataStore="store" />
 
         <section class="related-articles" v-if="relatedArticles.length">
           <h2 class="related-title">関連記事</h2>
@@ -72,7 +72,7 @@ const relatedArticles = computed<Article[]>(() => {
           <ul class="related-list">
             <li v-for="item in relatedArticles" :key="item.id" class="related-item">
               <!-- ✅ リンク手法は変更しない -->
-              <a :href="`/smart-ring/${item.slug}`" class="related-link">
+              <a :href="`/mattress/${item.slug}`" class="related-link">
                 <div class="related-card">
                   <div class="related-thumb" v-if="item.eyecatch?.url">
                     <v-img :src="item.eyecatch.url" :alt="item.title" cover />
