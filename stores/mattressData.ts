@@ -14,7 +14,7 @@ export const mattressDataStore = defineStore({
       title1:"おすすめ",
       title2:"マットレス",
       subtitle:"ランキング",
-      img:"https://res.cloudinary.com/fooddev/image/upload/v1761478467/pro.admarker/smart-ring/smart-ring_tstiwa.png"
+      img:"https://res.cloudinary.com/fooddev/image/upload/v1769531901/pro.admarker/mattress/mattress_xhyxov.png"
     },
     fv02:{
       title1:"●あなたに最適なマットレス診断",

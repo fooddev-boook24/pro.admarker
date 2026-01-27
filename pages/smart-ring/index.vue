@@ -58,12 +58,14 @@ const relatedArticles = computed<Article[]>(() => {
     <main class="page-main">
       <div class="mobile-width">
         <FvSmartring01 :dataStore="store" />
-        <FvSmartring02 :dataStore="store" />
-        <FvSmartring03 :dataStore="store" />
-        <SectionSmartring01 :dataStore="store" />
-        <SectionSmartring02 :dataStore="store" />
 
-        <!-- ✅ ランキング（目次はこの中で生成し、Teleportで右へ出す） -->
+        <!-- 🔥 検索の代わりに比較一覧（CMS参照） -->
+        <SectionSmartringCompareList :dataStore="store" />
+
+        <!-- （任意）長文導入は残すなら1ブロックだけ -->
+        <SectionSmartring01 :dataStore="store" />
+
+        <!-- 詳細ランキング（最終確認用） -->
         <SectionSmartring03 :dataStore="store" />
 
         <section class="related-articles" v-if="relatedArticles.length">

@@ -194,7 +194,7 @@ function AfiClick(serviceName) {
 
       <!-- ✅ 詳細ページへ遷移 -->
       <div class="my-box my-box-gap">
-        <div class="title-box1">
+        <div v-if="content.uniqueContents2" class="title-box1">
           <div class="title-box1-title">こちらもチェック！</div>
           <div
             v-html="content.uniqueContents2"
@@ -386,21 +386,6 @@ function AfiClick(serviceName) {
             </v-list-item>
           </v-list>
 
-          <div class="mt-4">
-          <v-btn
-            @click.stop.prevent="() => { 
-              AfiClick(content.serviceName); 
-              openInNewTab(content.pageURL); 
-            }"
-            block
-            rounded="xl"
-            size="x-large"
-            class="text-white my-btn"
-          >
-            {{ dataStore.sec03.pageaction }}
-          </v-btn>
-
-          </div>
         </div>
       </div>
     </div>

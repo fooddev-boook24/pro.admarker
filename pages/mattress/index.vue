@@ -5,7 +5,7 @@ import { mattressDataStore } from '@/stores/mattressData'
 const store = mattressDataStore()
 
 useHead({
-  title: '【2026版】マットレス 徹底比較',
+  title: '【2026版】おすすめマットレス 徹底比較',
   meta: [
     {
       name: 'description',
@@ -58,10 +58,8 @@ const relatedArticles = computed<Article[]>(() => {
     <main class="page-main">
       <div class="mobile-width">
         <FvMattress01 :dataStore="store" />
-        <FvMattress02 :dataStore="store" />
-        <FvMattress03 :dataStore="store" />
+        <SectionMattressCompareList :dataStore="store" />
         <SectionMattress01 :dataStore="store" />
-        <SectionMattress02 :dataStore="store" />
 
         <!-- ✅ ランキング（目次はこの中で生成し、Teleportで右へ出す） -->
         <SectionMattress03 :dataStore="store" />
