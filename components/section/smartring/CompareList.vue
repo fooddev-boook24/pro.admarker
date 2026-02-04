@@ -225,21 +225,7 @@ function trackAffiliateClick(serviceName: string) {
   box-shadow: 0 16px 40px rgba(0,0,0,0.08);
 }
 
-/* 右端フェード：まだ右にあることを示す */
-.compare__scroll::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 34px;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    rgba(255,255,255,0),
-    rgba(255,255,255,0.95)
-  );
-  pointer-events: none;
-}
+
 
 /* テーブル：カード行にするため separate + 行間 */
 .compare__table {
@@ -260,6 +246,9 @@ function trackAffiliateClick(serviceName: string) {
   font-size: 0.74rem;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.45);
+}
+.compare__table :deep(.v-table__wrapper) {
+  overflow: visible;
 }
 
 /* 行カード：tdで丸角と影を作る */
